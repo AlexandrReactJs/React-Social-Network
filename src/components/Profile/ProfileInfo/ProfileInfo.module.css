@@ -1,0 +1,13 @@
+.profileAvatar img{
+    width: 250px;
+    height: 350px;
+    border-radius: 10px;
+    margin-right: 50px;
+}
+
+.profileInfo{
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 100px;
+}
+

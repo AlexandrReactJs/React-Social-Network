@@ -1,0 +1,13 @@
+.dialogs{
+    display: grid;
+    grid-template-columns: 2fr 10fr;
+}
+
+.dialogsItems{
+    margin-right: 70px;
+}
+
+.messageInput{
+    width: 600px;
+    height: 60px;
+}

@@ -1,0 +1,40 @@
+.user{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    color: white;
+    font-weight: 800;
+    font-size: 18px;
+    width: 100%;
+    margin-bottom: 30px;
+}
+.userPhoto img{
+    width: 100px;
+    height: 100px;
+    margin-right: 70px;
+
+}
+.userInfo{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.usersPagination{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    margin-bottom: 80px;
+}
+
+.usersPagination span{
+    width: 5%;
+    color: white;
+    font-size: 18px;
+    padding-right: 10px;
+}
+
+.active{
+    font-weight: 800;
+}

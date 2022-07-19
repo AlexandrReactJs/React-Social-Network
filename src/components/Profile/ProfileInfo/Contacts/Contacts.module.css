@@ -1,0 +1,10 @@
+.contact{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.contact span{
+    margin-right: 7px;
+}
+
