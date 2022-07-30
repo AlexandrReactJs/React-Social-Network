@@ -5,8 +5,8 @@ import './index.css';
 import App from './App';
 import store from './redux/redux-store';
 import { Provider } from 'react-redux';
-
-
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Login from "./components/Login/Login";
 
 
 
@@ -14,9 +14,14 @@ let rerenderAllTree = () => {
   ReactDOM.render(
     <React.StrictMode>
       <Provider store={store}>
-        <App />
+        <BrowserRouter>
+          <Routes>
+            <Route path="/*" element={<App />} />
+            <Route path="/login" element={<Login />} />
+          </Routes>
+        </BrowserRouter>
       </Provider>
-      </React.StrictMode>,
+    </React.StrictMode>,
     document.getElementById('root')
   );
 }

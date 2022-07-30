@@ -1,34 +1,44 @@
 import { connect } from "react-redux";
-import { followActionCreator, setCurrentPageActionCreator, setIsFetchingActionCreator, setTotalUsersCountActionCreator, setUsersActionCreator, unfollowActionCreator } from "../../../redux/users-reducer";
 import React from "react";
 import User from './User';
 import Preloader from "../../common/Preloader";
 import { getUserThunkCreator } from "../../../redux/users-reducer";
+import { followThunkCreator } from "../../../redux/users-reducer";
+import { unfollowThunkCreator } from "../../../redux/users-reducer";
+import { WithAuthRedirect } from "../../HOC/withAuthRedirect";
 
 
+const UserContainer = ({ getUserThunkCreator, isFetching, totalUsersCount,
+    pageSize, currentPage, users,
+    unfollowThunkCreator, followThunkCreator, isRequestParams, isAuth }) => {
 
-const UserContainer = (props) => {
+    const getUser = React.useCallback(() => {
+        getUserThunkCreator(currentPage, pageSize);
+    }, [getUserThunkCreator, currentPage, pageSize])
+
     React.useEffect(() => {
-        props.getUserThunkCreator(props.currentPage, props.pageSize);
-    }, []);
+        getUser();
+    }, [getUser]);
 
     let onCurrentPageChange = (pageNum) => {
-        
-        props.getUserThunkCreator(pageNum, props.pageSize);
+        getUserThunkCreator(pageNum, pageSize);
     }
 
-    return(
+    return (
         <>
-            <Preloader isFetching = {props.isFetching}/>
-            <User totalUsersCount={props.totalUsersCount}
-                pageSize={props.pageSize}
-                currentPage={props.currentPage}
-                onCurrentPageChange={onCurrentPageChange} users={props.users} unfollow={props.unfollowActionCreator} follow={props.followActionCreator} />
+            <Preloader isFetching={isFetching} />
+            <User totalUsersCount={totalUsersCount}
+                pageSize={pageSize}
+                currentPage={currentPage}
+                onCurrentPageChange={onCurrentPageChange}
+                users={users}
+                unfollow={unfollowThunkCreator}
+                follow={followThunkCreator}
+                isRequestParams={isRequestParams} isAuth={isAuth} />
         </>
 
     );
 }
-
 
 
 let mapStateToProps = (state) => {
@@ -38,9 +48,11 @@ let mapStateToProps = (state) => {
         totalUsersCount: state.usersPage.totalUsersCount,
         currentPage: state.usersPage.currentPage,
         isFetching: state.usersPage.isFetching,
+        isRequestParams: state.usersPage.isRequestParams,
+        isAuth: state.auth.isAuth
     }
 }
 
+let authRedirect = WithAuthRedirect(UserContainer);
 
-
-export default connect(mapStateToProps, {followActionCreator, unfollowActionCreator, getUserThunkCreator})(UserContainer);
+export default connect(mapStateToProps, { followThunkCreator, unfollowThunkCreator, getUserThunkCreator })(authRedirect);

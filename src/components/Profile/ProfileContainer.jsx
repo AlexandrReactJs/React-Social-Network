@@ -1,34 +1,36 @@
 import React from "react";
 import { connect } from "react-redux";
 import Profile from "./Profile";
-import { setUserProfileActionCreator } from "../../redux/profile-reducer";
 import { useParams } from "react-router";
-import * as axios from "axios"
-import { profileAPI } from "../../api/api";
+import { setUserProfileThunkCreator } from "../../redux/profile-reducer";
+import { WithAuthRedirect } from "../HOC/withAuthRedirect";
 
-
-const ProfileContainer = (props) => {
+const ProfileContainer = ({setUserProfileThunkCreator , profile}) => {
+    const { id } = useParams();
+    const setUser = React.useCallback(() => {
+        setUserProfileThunkCreator(id);
+    }, [id, setUserProfileThunkCreator])
     React.useEffect(() => {
-        profileAPI.getProfile(id).then(response => {
-            debugger
-            props.setUserProfileActionCreator(response);
-        })
-    }, []);
+        setUser();
+    }, [setUser]);
 
-    const {id} = useParams();
+    
+   
     return (
-        <div >
-            <Profile profile={props.profile} />
-        </div>
+        
+            <Profile profile={profile} />
+        
     );
 }
 
+let authRedirect = WithAuthRedirect(ProfileContainer)
 
 let mapStateToProps = (state) => ({
-    profile: state.profilePage.profile
+    profile: state.profilePage.profile,
+    isAuth: state.auth.isAuth
 });
 
 
 
 
-export default connect(mapStateToProps, { setUserProfileActionCreator })(ProfileContainer);
+export default connect(mapStateToProps, { setUserProfileThunkCreator })(authRedirect);

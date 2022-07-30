@@ -1,8 +1,7 @@
 import React from "react";
 import './App.css';
 import Sidebar from "./components/Sidebar/Sidebar";
-
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import News from "./components/News/News";
 import Settings from "./components/Settings/Settings";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
@@ -13,7 +12,7 @@ import HeaderContainer from "./components/Header/HeaderContainer";
 
 const App = (props) => {
   return (
-    <BrowserRouter>
+   
       <div className="App">
         <HeaderContainer/>
         <Sidebar />
@@ -29,7 +28,7 @@ const App = (props) => {
           </Routes>
         </div>
       </div>
-    </BrowserRouter>
+
   );
 }
 
