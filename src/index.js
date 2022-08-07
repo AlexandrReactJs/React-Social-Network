@@ -5,23 +5,19 @@ import './index.css';
 import App from './App';
 import store from './redux/redux-store';
 import { Provider } from 'react-redux';
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Login from "./components/Login/Login";
+import { BrowserRouter } from "react-router-dom";
 
 
 
 let rerenderAllTree = () => {
   ReactDOM.render(
-    <React.StrictMode>
+    /*<React.StrictMode>*/
       <Provider store={store}>
         <BrowserRouter>
-          <Routes>
-            <Route path="/*" element={<App />} />
-            <Route path="/login" element={<Login />} />
-          </Routes>
+          <App authUserId = {store.getState().auth.userId}/>
         </BrowserRouter>
-      </Provider>
-    </React.StrictMode>,
+      </Provider>,
+    /*</React.StrictMode>,*/
     document.getElementById('root')
   );
 }

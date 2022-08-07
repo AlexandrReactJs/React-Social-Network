@@ -3,6 +3,8 @@ import { profileAPI } from "../api/api";
 const ADD_POST = "ADD-POST";
 const UPDATE_POST_VALUE = "UPDATE-POST-VALUE";
 const SET_USER_PROFILE = "SET_USER_PROFILE";
+const SET_STATUS = "SET_STATUS";
+const UPDATE_STATUS = "UPDATE_STATUS";
 
 
 let inintialState = {
@@ -14,7 +16,9 @@ let inintialState = {
     { id: 5, likeCount: 27, postText: "text5", userAvatar: "https://mobimg.b-cdn.net/v3/fetch/13/13fcae729f327cc0ba8e82dfda2291ea.jpeg" }
   ],
   profile: null,
-  newPostValue: ''
+  newPostValue: '',
+  status: ""
+  
 }
 
 const profileReducer = (state = inintialState, action) => {
@@ -38,6 +42,10 @@ const profileReducer = (state = inintialState, action) => {
       }
     case SET_USER_PROFILE:
       return { ...state, profile: action.profile }
+    case SET_STATUS:
+      return{...state, status: action.status}
+    case UPDATE_STATUS:
+      return{...state, status: action.newStatus}  
     default:
       return state;
   }
@@ -62,6 +70,40 @@ export let setUserProfileActionCreator = (profile) => {
     type: SET_USER_PROFILE,
     profile
   })
+}
+
+export let setUserStatusActionCreator = (status) => {
+  return({
+    type: SET_STATUS,
+    status
+  })
+}
+
+export let updateUserStatusActionCreator = (newStatus) => {
+  return({
+    type: UPDATE_STATUS,
+    newStatus
+  })
+}
+
+export let updateUserStatusThunkCreator = (newStatus) => {
+  return (dispatch) => {
+    profileAPI.updateStatus(newStatus).then(response => {
+      if(response.data.resultCode === 0){
+        dispatch(setUserStatusActionCreator(newStatus))
+      }
+    })
+
+  }
+}
+
+
+export let setUserStatusThunkCreator = (id) => {
+  return (dispatch) => {
+    profileAPI.getStatus(id).then(response => {
+      dispatch(setUserStatusActionCreator(response.data));
+    })
+  }
 }
 
 export let setUserProfileThunkCreator = (id) => {

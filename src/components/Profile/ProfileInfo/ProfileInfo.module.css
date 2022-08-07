@@ -1,6 +1,13 @@
-.profileAvatar img{
+.avatar{
     width: 250px;
     height: 350px;
+    border-radius: 10px;
+    margin-right: 50px;
+}
+
+.noavatar{
+    width: 250px;
+    height: 250px;
     border-radius: 10px;
     margin-right: 50px;
 }

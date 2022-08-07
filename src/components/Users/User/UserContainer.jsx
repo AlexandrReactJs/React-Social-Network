@@ -6,6 +6,7 @@ import { getUserThunkCreator } from "../../../redux/users-reducer";
 import { followThunkCreator } from "../../../redux/users-reducer";
 import { unfollowThunkCreator } from "../../../redux/users-reducer";
 import { WithAuthRedirect } from "../../HOC/withAuthRedirect";
+import { compose } from "redux";
 
 
 const UserContainer = ({ getUserThunkCreator, isFetching, totalUsersCount,
@@ -53,6 +54,8 @@ let mapStateToProps = (state) => {
     }
 }
 
-let authRedirect = WithAuthRedirect(UserContainer);
+export default compose(
+    connect(mapStateToProps, { followThunkCreator, unfollowThunkCreator, getUserThunkCreator }),
+    WithAuthRedirect
+)(UserContainer)
 
-export default connect(mapStateToProps, { followThunkCreator, unfollowThunkCreator, getUserThunkCreator })(authRedirect);

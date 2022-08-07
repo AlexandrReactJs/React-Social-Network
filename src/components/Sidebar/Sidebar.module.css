@@ -1,11 +1,13 @@
 .nav{
     grid-area: nav;
     padding: 0 10px;
+    margin-top: 10px;
 }
 
 .nav_link{
-    color:#00FA9A;
+    color: #686868;
     text-decoration: none;
     font-weight: 700;
     
 }
+

@@ -5,31 +5,7 @@ import DialogsItems from "./DialogsItems/DialogsItems";
 
 
 
-let a = {
-    name: " www.com",
-    age: 18,
-    protocol: "https",
-    students: ["alex", "valera","egor"],
-    classroom:{
-        teacher:{
-            name: "alex",
-            age: 18
-        }
-        
-    }
-};
 
-let b = {
-    ...a
-}
-b.students = {...a.students}
-b.classroom = {...a.classroom}
-b.classroom.teacher = {...a.classroom.teacher}
-
-b.students[0]="egor"
-b.classroom.teacher.name = "egor"
-
-console.log(a)
 
 
 

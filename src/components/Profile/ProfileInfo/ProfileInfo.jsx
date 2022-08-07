@@ -1,7 +1,8 @@
 import React from "react";
 import style from "./ProfileInfo.module.css";
 import Preloader from "../../common/Preloader"
-import Contacts from "./Contacts/Contacts";
+import Noavatar from "../../../assets/images/noavatar.jpg"
+import ProfileStatus from "./ProfileStatus/ProfileStatus";
 
 const ProfileInfo = (props) => {
     if(!props.profile){
@@ -10,13 +11,14 @@ const ProfileInfo = (props) => {
     return(
         <div className={style.profileInfo}>
                 <div className={style.profileAvatar}>
+                    {props.profile.photos.large ? <img className={style.avatar} src={props.profile.photos.large} alt="avatar" /> : <img className={style.noavatar} src={Noavatar} alt="no avatar"/>}
 
-                    <img src={props.profile.photos.large} alt="" />
                 </div>
                 <div className={style.profileDesription}>
                     <h3>{props.profile.fullName}</h3>
                     <p> {props.profile.aboutMe}</p>
-                    <Contacts profile = {props.profile}/>
+                    <ProfileStatus newStatusValue={props.newStatusValue} updateUserStatusActionCreator = {props.updateUserStatusActionCreator} updateUserStatusThunkCreator = {props.updateUserStatusThunkCreator} status={props.status}/>
+                    {/*<Contacts profile = {props.profile}/>*/}
                 </div>
             </div>
     );

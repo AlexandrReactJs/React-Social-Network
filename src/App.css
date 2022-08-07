@@ -1,12 +1,12 @@
 body{
   min-height: 100vh;
-  background: linear-gradient(315deg, #00CED1 , #DA70D6 60%);
+  background: #fff;
   width: 100%;
 }
 .App {
   display: grid;
-  grid-template-rows: 80px 1fr;
-  grid-template-columns: 2fr 10fr;
+  grid-template-rows: 60px 1fr;
+  grid-template-columns: 1fr 10fr;
   grid-template-areas:
   "header header"
   "nav content";

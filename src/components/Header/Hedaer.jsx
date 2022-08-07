@@ -7,9 +7,17 @@ const Hedaer = (props) => {
     
     return(
         <header className={style.header}>
-            <img src={Logo} alt="logo" />
+            <div>
+                <h3>Logo</h3>
+            </div>
+             {/*<div>
+                <NavLink to={'/profile/' + props.userId}>
+                    <img src="" alt="avatar"/>
+                    <p>{props.login}</p>
+                </NavLink>
+    </div> */}             
             <div className={style.loginBlock}>
-                {props.isAuth ? props.login : <NavLink to='/login'>Login</NavLink>}
+                {props.isAuth ? <NavLink to={'/profile/' + props.userId}>{props.login}</NavLink> : <NavLink to='/login'>Login</NavLink>}
                 
             </div>
         </header>

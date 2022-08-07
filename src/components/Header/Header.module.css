@@ -1,11 +1,18 @@
 .header{
     grid-area: header;
-    padding: 0 100px;
+    padding: 0 10px;
     display: flex;
     justify-content: space-between;
-    
+    align-items: center;
+    background: linear-gradient(90deg, #c36dd5, #5b3be9);
+    margin-top: 5px;
+    border-radius: 6px;
 }
 
-.header h1{
-    color:#00FA9A;
+.header h3{
+    color: #fff;
+}
+
+.header a{
+    color: #fff;
 }
