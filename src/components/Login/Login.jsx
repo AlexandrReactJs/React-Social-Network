@@ -1,10 +1,11 @@
 import React from "react";
+import LoginFormContainer from "./LoginForm/LoginFormContainer";
 
 
 const Login = () => {
     return(
         <div>
-            Login 
+            <LoginFormContainer/>
         </div>
     )
 }

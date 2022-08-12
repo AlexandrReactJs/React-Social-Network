@@ -37,48 +37,43 @@ const User = (props) => {
         }
     }
 
-   
-    
-    return(
+
+
+    return (
         <div>
             <div className={style.usersPagination}>
-                <button disabled={fromPagesCount <= 1 ? "disabled" : ""} onClick={() => prevPagination()}>Prev</button>
+                <button className={style.pagination_nav} disabled={fromPagesCount <= 1 ? "disabled" : ""} onClick={() => prevPagination()}>{"<"}</button>
+                <div className={style.pages}>
                 {
 
                     pages.map(p => {
-                        return <span className={props.currentPage === p && style.active} onClick={(e) => { props.onCurrentPageChange(p) }}>{p}</span>
+                        return <span className={style.link_page} onClick={(e) => { props.onCurrentPageChange(p) }}>{p}</span>
                     })
 
                 }
-                <button disabled={beforePagesCount === pagesCount ? "disabled" : ""} onClick={() => nextPagination()}>Next</button>
+                </div>
+                <button className={style.pagination_nav} disabled={beforePagesCount === pagesCount ? "disabled" : ""} onClick={() => nextPagination()}>{">"}</button>
             </div>
             {
                 props.users.map(u => (
                     <div className={style.user}>
-                        <div className={style.userPhoto}>
+
+                        <div className={style.user_profile}>
+                            <NavLink className={style.user_photo_link} to={"/profile/" + u.id} >
+                                <img className={style.user_photo} src={u.photos.small != null ? u.photos.small : userPhoto} alt="" />
+                            </NavLink>
                             <div>
-                                <NavLink to={"/profile/" + u.id} >
-                                    <img src={u.photos.small != null ? u.photos.small : userPhoto} alt="" />
-                                </NavLink>
-                                <div>
-                                    {u.followed ? <button disabled={props.isRequestParams.userId === u.id && props.isRequestParams.isRequest ? "disabled" : ""}
-                                        onClick={() => { props.unfollow(u.id) }}>Unfollow</button> :
-                                        <button disabled={props.isRequestParams.userId === u.id && props.isRequestParams.isRequest ? "disabled" : ""}
-                                            onClick={() => { props.follow(u.id) }}>Follow</button>}
+                                {u.followed ? <button className={style.toglle_button} disabled={props.isRequestParams.userId === u.id && props.isRequestParams.isRequest ? "disabled" : ""}
+                                    onClick={() => { props.unfollow(u.id) }}>Unfollow</button> :
+                                    <button className={style.toglle_button} disabled={props.isRequestParams.userId === u.id && props.isRequestParams.isRequest ? "disabled" : ""}
+                                        onClick={() => { props.follow(u.id) }}>Follow</button>}
 
-                                </div>
                             </div>
+
                         </div>
-                        <div className={style.userInfo}>
-                            <div className={style.userInfoName}>
+                        <div className={style.user_info}>
                                 <h3>{u.name}</h3>
-                                <p>{u.status}</p>
-                            </div>
-                            <div className={style.userInfoLocation}>
-                                <p>{"u.location.sity"}</p>
-                                <p>{"u.location.counrty"}</p>
-                            </div>
-
+                                <p>Status: {u.status ? u.status : "No status :(("}</p>
                         </div>
                     </div>
 
