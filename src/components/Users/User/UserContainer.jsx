@@ -9,7 +9,7 @@ import { WithAuthRedirect } from "../../HOC/withAuthRedirect";
 import { compose } from "redux";
 
 
-const UserContainer = ({ getUserThunkCreator, isFetching, totalUsersCount,
+const UserContainer = ({ getUserThunkCreator, totalUsersCount,
     pageSize, currentPage, users,
     unfollowThunkCreator, followThunkCreator, isRequestParams, isAuth }) => {
 
@@ -25,9 +25,10 @@ const UserContainer = ({ getUserThunkCreator, isFetching, totalUsersCount,
         getUserThunkCreator(pageNum, pageSize);
     }
 
+  
+
     return (
-        <>
-            <Preloader isFetching={isFetching} />
+    
             <User totalUsersCount={totalUsersCount}
                 pageSize={pageSize}
                 currentPage={currentPage}
@@ -36,7 +37,7 @@ const UserContainer = ({ getUserThunkCreator, isFetching, totalUsersCount,
                 unfollow={unfollowThunkCreator}
                 follow={followThunkCreator}
                 isRequestParams={isRequestParams} isAuth={isAuth} />
-        </>
+    
 
     );
 }

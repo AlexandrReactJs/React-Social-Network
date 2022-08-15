@@ -15,7 +15,7 @@ const authReducer = (state = initialState, action) => {
     switch (action.type) {
         case SET_USER_DATA:
             return {
-                ...state, ...action.data, isAuth: true
+                ...state, ...action.data
             }   
         default: return state;
     }
@@ -28,10 +28,11 @@ export const setUserDataActionCreator = (userId, email, login, isAuth) => ({ typ
 
 export const getUserDataThunkCreator = () => {
     return (dispatch) => {
-        authAPI.getUserAuthData().then(data => {
+        return authAPI.getUserAuthData().then(data => {
             if (data.resultCode === 0) {
                 let { id, email, login } = data.data;
-                dispatch(setUserDataActionCreator(id, email, login));
+                let isAuth = true;
+                dispatch(setUserDataActionCreator(id, email, login, isAuth));
             }
         })
     }
