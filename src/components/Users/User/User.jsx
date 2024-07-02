@@ -47,7 +47,7 @@ const User = (props) => {
                 {
 
                     pages.map(p => {
-                        return <span className={style.link_page} onClick={(e) => { props.onCurrentPageChange(p) }}>{p}</span>
+                        return <span className={style.link_page} onClick={() => { props.onCurrentPageChange(p) }}>{p}</span>
                     })
 
                 }

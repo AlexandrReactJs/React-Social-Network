@@ -1,21 +1,24 @@
 import React from "react";
-import { connect } from "react-redux";
-import { loginThunkCreator } from "../../../redux/auth-reducer";
 import LoginForm from "./LoginForm";
+import { authAPI } from "../../../api/api";
+import { useDispatch, useSelector} from "react-redux";
+import { fetchUserAuthData } from "../../../RTK/slices/auth-slice";
 
+const LoginFormContainer = () => {
+    const dispatch = useDispatch()
+    const {userId, isAuth} = useSelector(state => state.auth)
 
-const LoginFormContainer = ({loginThunkCreator, isAuth, userId}) => {
+    const Login = (email, password, rememberMe) => {
+        authAPI.login(email, password, rememberMe).then(res => {
+            if(res.data.resultCode === 0) {
+                dispatch(fetchUserAuthData())
+            }
+        })
+    }
+
     return(
-        <LoginForm userId = {userId} isAuth={isAuth} loginThunkCreator={loginThunkCreator}/>
+        <LoginForm userId = {userId} isAuth={isAuth} login= {Login}/>
     )
 }
 
-let mapStateToProps = (state) => {
-    return{
-        isAuth: state.auth.isAuth,
-        userId: state.auth.userId
-    }
-}
-
-
-export default connect(mapStateToProps, {loginThunkCreator})(LoginFormContainer)
+export default LoginFormContainer;

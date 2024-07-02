@@ -1,25 +1,30 @@
 import React from "react";
 import Hedaer from "./Hedaer";
-import { connect } from "react-redux";
-import {logOutThunkCreator} from "../../redux/auth-reducer"
+import { useSelector, useDispatch } from "react-redux";
+import { authAPI } from "../../api/api";
+import { logOut } from "../../RTK/slices/auth-slice";
 
 
 
 
+const HeaderContainer = () => {
+    const dispatch = useDispatch()
+    const userData = useSelector(state => state.auth)
 
-const HeaderContainer = ({logOutThunkCreator, isAuth, login, userId}) => {
 
+    const fetchLogOut = () => {
+        authAPI.logOut().then(res => {
+            if(res.data.resultCode === 0) {
+                dispatch(logOut)
+            }
+        })
+    }
+
+  
 
     return (
-        <Hedaer userId = {userId} isAuth = {isAuth} login = {login} logOutThunkCreator={logOutThunkCreator}/>
+        <Hedaer userId = {userData.userId} isAuth = {userData.isAuth} login = {userData.login} logOut= {fetchLogOut}/>
     )
 }
 
-const mapStateToProps = (state) => ({
-    isAuth: state.auth.isAuth,
-    login: state.auth.login,
-    userid: state.auth.userId
-})
-
-
-export default connect(mapStateToProps, { logOutThunkCreator })(HeaderContainer);
+export default HeaderContainer;
