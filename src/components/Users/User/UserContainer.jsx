@@ -1,9 +1,11 @@
 import React from "react";
 import User from './User';
-import { followThunkCreator } from "../../../redux/users-reducer";
-import { unfollowThunkCreator } from "../../../redux/users-reducer";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUsers, setCurrentPage } from "../../../RTK/slices/users-slice";
+import { follow } from "../../../RTK/slices/users-slice";
+import { unfollow } from "../../../RTK/slices/users-slice";
+
+
 
 const UserContainer = () => {
     const dispatch = useDispatch()
@@ -33,8 +35,8 @@ const UserContainer = () => {
             currentPage={currentPage}
             onCurrentPageChange={onCurrentPageChange}
             users={users}
-            unfollow={unfollowThunkCreator}
-            follow={followThunkCreator}
+            unfollow={unfollow}
+            follow={follow}
             isRequestParams={isRequestParams} isAuth={isAuth} />
 
 

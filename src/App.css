@@ -1,24 +1,12 @@
-body{
-  min-height: 100vh;
-  background: #fff;
+.App{
+  display: flex;
+  flex-direction: column; 
+}
+
+.app-container{
+  display: flex;
+  flex-direction: row;
   width: 100%;
-  background-color: rgba(25, 25, 26, 1);
-  
-}
-.App {
-  display: grid;
-  grid-template-rows: 60px 1fr;
-  grid-template-columns: 1fr 10fr;
-  grid-template-areas:
-  "header header"
-  "nav content";
-  width: 1200px;
+  max-width: 1200px;
   margin: 0 auto;
-}
-
-
-
-.content{
-  grid-area: content;
-  padding: 0 200px;
 }

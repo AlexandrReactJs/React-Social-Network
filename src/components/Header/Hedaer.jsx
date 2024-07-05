@@ -11,7 +11,7 @@ const Hedaer = (props) => {
     return (
         <header className={style.header}>
             <div>
-                <h3>Logo</h3>
+                <h3 className={style.logo}>SOCIAL.<span className={style.logo_wrapper}>NETWORK</span></h3>
             </div>
             <div className={style.loginBlock}>
                 {props.isAuth ?

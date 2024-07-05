@@ -4,13 +4,12 @@ import style from "./Users.module.css";
 
 const Users = () => {
 
-    return(
-        <div className={style.findUsers}>
+    return (
 
-            <div className={style.Users}>
-                <UserContainer/>
-            </div>
+        <div className={style.Users}>
+            <UserContainer />
         </div>
+
     );
 }
 

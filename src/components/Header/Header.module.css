@@ -1,12 +1,19 @@
 .header{
-    grid-area: header;
-    padding: 0 10px;
+
+    padding: 10px 45px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: linear-gradient(90deg, #c36dd5, #5b3be9);
-    margin-top: 5px;
-    border-radius: 6px;
+    background-color: #323232;
+
+}
+.logo{
+    font-weight: 800;
+}
+
+.logo_wrapper{
+    font-weight: 300;
+    font-size: 16px;
 }
 
 .header h3{

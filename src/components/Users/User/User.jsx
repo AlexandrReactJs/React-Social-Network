@@ -2,10 +2,13 @@ import React from "react";
 import style from "./User.module.css";
 import userPhoto from "../../../assets/images/noavatar.jpg";
 import { NavLink } from "react-router-dom";
-
+import { useDispatch } from "react-redux";
 
 
 const User = (props) => {
+    const dispatch = useDispatch()
+
+
     let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
 
     let pages = [];
@@ -17,8 +20,6 @@ const User = (props) => {
     }
 
     const nextPagination = () => {
-
-
         setFromPagesCount(fromPagesCount + 10)
         setBeforePagesCount(beforePagesCount + 10)
         for (let i = fromPagesCount; i <= beforePagesCount; i++) {
@@ -64,9 +65,9 @@ const User = (props) => {
                             </NavLink>
                             <div>
                                 {u.followed ? <button className={style.toglle_button} disabled={props.isRequestParams.userId === u.id && props.isRequestParams.isRequest ? "disabled" : ""}
-                                    onClick={() => { props.unfollow(u.id) }}>Unfollow</button> :
+                                    onClick={() => { dispatch(props.unfollow(u.id)) }}>Unfollow</button> :
                                     <button className={style.toglle_button} disabled={props.isRequestParams.userId === u.id && props.isRequestParams.isRequest ? "disabled" : ""}
-                                        onClick={() => { props.follow(u.id) }}>Follow</button>}
+                                        onClick={() => { dispatch(props.follow(u.id)) }}>Follow</button>}
 
                             </div>
 
