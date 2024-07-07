@@ -16,8 +16,8 @@ import type { AppDispatch } from "./RTK/store";
 
 const App = () => {
   const dispatch = useDispatch<AppDispatch>()
-  const isAuth = useSelector((state: RootState) => state.auth.isAuth)
-
+  const {isAuth, userId} = useSelector((state: RootState) => state.auth)
+  
 
   React.useEffect(() => {
     dispatch(fetchUserAuthData())
@@ -34,7 +34,7 @@ const App = () => {
             <HeaderContainer />
 
             <div className="app-container">
-              <SidebarContainer />
+              <SidebarContainer userId={userId}/>
               <div className="content">
                 <Routes>
                   <Route path="/profile/:id" element={<ProfileContainer />} />

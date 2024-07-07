@@ -4,9 +4,17 @@ import { NavLink } from "react-router-dom";
 
 
 
+interface Props {
+    userId: number | null;
+    isAuth: boolean | null;
+    login: string | null
+    logOut: () => void
+}
 
 
-const Hedaer = (props) => {
+
+
+const Hedaer : React.FC<Props> = ({userId, isAuth, login, logOut}) => {
 
     return (
         <header className={style.header}>
@@ -14,10 +22,10 @@ const Hedaer = (props) => {
                 <h3 className={style.logo}>SOCIAL.<span className={style.logo_wrapper}>NETWORK</span></h3>
             </div>
             <div className={style.loginBlock}>
-                {props.isAuth ?
+                {isAuth ?
                     <div className={style.auth_info}>
-                        <NavLink className={style.link_to_profile} to={'/profile/' + props.userId}>{props.login}</NavLink>
-                        <NavLink className={style.logout_button} to="/login" onClick={() => { props.logOut() }}>LogOut</NavLink>
+                        <NavLink className={style.link_to_profile} to={'/profile/' + userId}>{login}</NavLink>
+                        <NavLink className={style.logout_button} to="/login" onClick={() => { logOut() }}>LogOut</NavLink>
 
                     </div>
                     : <NavLink className={style.login_button} to='/login'>Login</NavLink>

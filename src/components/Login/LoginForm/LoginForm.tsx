@@ -5,13 +5,22 @@ import styles from './LoginForm.module.css'
 import showPasswordIcon from '../../../assets/images/eye.png'
 
 
-const LoginForm = (props) => {
-    const [showPassword, setShowPassword] = React.useState(true)
+interface Props {
+    userId: number | null;
+    isAuth: boolean;
+    login: (email: string, password: string, rememberMe: boolean) => void
+}
 
 
 
-    if (props.isAuth) {
-        return <Navigate to={'/profile/' + props.userId} />
+const LoginForm : React.FC<Props> = ({userId, isAuth, login}) => {
+
+    const [showPassword, setShowPassword] = React.useState<boolean>(false)
+
+
+
+    if (isAuth) {
+        return <Navigate to={'/profile/' + userId} />
     }
 
 
@@ -22,7 +31,7 @@ const LoginForm = (props) => {
             initialValues={{ email: '', password: '', rememberMe: false }}
 
             onSubmit={(values, { setSubmitting }) => {
-                props.login(values.email, values.password, values.rememberMe);
+                login(values.email, values.password, values.rememberMe);
                 setSubmitting(false);
             }}
         >
@@ -30,7 +39,7 @@ const LoginForm = (props) => {
             {({ isSubmitting }) => (
                 <div className={styles.login}>
 
-
+                
                     <Form className={styles.form}>
                         <div className={styles.title}>
                             <h1>Вход</h1>

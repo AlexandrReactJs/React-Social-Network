@@ -3,13 +3,13 @@ import Hedaer from "./Hedaer";
 import { useSelector, useDispatch } from "react-redux";
 import { authAPI } from "../../api/api";
 import { logOut } from "../../RTK/slices/auth-slice";
-
+import type { RootState } from "../../RTK/store";
 
 
 
 const HeaderContainer = () => {
     const dispatch = useDispatch()
-    const userData = useSelector(state => state.auth)
+    const userData = useSelector((state: RootState) => state.auth)
 
 
     const fetchLogOut = () => {

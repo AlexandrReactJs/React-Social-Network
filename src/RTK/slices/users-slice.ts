@@ -47,7 +47,7 @@ export interface usersState {
 
 }
 
-type user = {
+export type user = {
     name: string
     id: number
     photos: {
