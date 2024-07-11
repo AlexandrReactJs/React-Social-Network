@@ -5,9 +5,7 @@ import Noavatar from "../../../assets/images/noavatar.jpg"
 import ProfileStatus from "./ProfileStatus/ProfileStatus";
 
 const ProfileInfo = (props) => {
-    if(!props.profile){
-        return <Preloader/>
-    }
+    
     return(
         <div className={style.profileInfo}>
                 <div className={style.profileAvatar}>
