@@ -1,25 +1,45 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchUserStatus, updateUserStatus } from "../../../../RTK/slices/profile-slice";
+import { changeStatus } from "../../../../RTK/slices/profile-slice";
+
+
+
+
+
 
 
 const ProfileStatus = (props) => {
-    let statusValue = React.createRef(); 
+    const dispatch = useDispatch()
     const [editStatus, setEditStatus] = React.useState(false)
-    const changedStatusValue = () => {
-        let text = statusValue.current.value;
-        props.updateUserStatusActionCreator(text)
+    const status = useSelector(state => state.profile.status)
+    const authMeId = useSelector(state => state.auth.userId)
+
+
+    React.useEffect(() => {
+        dispatch(fetchUserStatus(props.userId))
+    }, [props.userId])
+
+
+    const updateStatus = (status) => {
+        dispatch(updateUserStatus(status))
     }
-    let updateUserStatus = () => {
-        let text = statusValue.current.value;
-        props.updateUserStatusThunkCreator(text);
-    }
+
+
+    const onChangeStatus = (text) => {
+        dispatch(changeStatus(text))
+    }  
+
+
+
     return (
         <div>
             {
-                editStatus ? <div>
-                                <input ref={statusValue} autoFocus={true} onBlur={() => {updateUserStatus(); setEditStatus(false);}} onChange = {changedStatusValue} type="text" value={props.status} />
+                editStatus && authMeId === props.userId ? <div>
+                                <input autoFocus={true} onBlur={() => {updateStatus(status); setEditStatus(false)}} type="text" onChange={(e) => {onChangeStatus(e.target.value)}} value={status} />
                             </div> :
                             <div>
-                                <span onClick={() => setEditStatus(true)}>Статус: {props.status}</span>
+                                <span onClick={() => setEditStatus(true)}>Статус: {status}</span>
                             </div>
             }
 

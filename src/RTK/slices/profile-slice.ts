@@ -47,9 +47,28 @@ export const fetchUserProfile = createAsyncThunk(
     async (userId: number) => {
         const res = await profileAPI.getProfile(userId)
         return res
+        
     }
 )
 
+
+export const fetchUserStatus = createAsyncThunk(
+    "profile/fetchUserStatus",
+    async (userId: number) => {
+        const res = await profileAPI.getStatus(userId)
+        return res
+    }
+)
+
+
+export const updateUserStatus = createAsyncThunk(
+    'profile/updateUserStatus',
+    async (status: string) => {
+        const res = await profileAPI.updateStatus(status)
+
+        return res
+    }
+) 
 
 
 
@@ -73,17 +92,21 @@ export const profileSlice: Slice<ProfileState> = createSlice({
     name: 'profile',
     initialState,
     reducers: {
-
+        changeStatus: (state, action) => {
+            state.status = action.payload
+        }
     },
 
     extraReducers: (builder) => {
         builder.addCase(fetchUserProfile.fulfilled, (state, action) => {
             state.profile = action.payload
+        }).addCase(fetchUserStatus.fulfilled, (state, action) => {
+            state.status = action.payload.data
         })
     }
 })
 
 
-export const {  } = profileSlice.actions
+export const { changeStatus } = profileSlice.actions
 
 export default profileSlice.reducer

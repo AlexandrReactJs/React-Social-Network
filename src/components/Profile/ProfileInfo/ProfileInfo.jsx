@@ -6,6 +6,11 @@ import ProfileStatus from "./ProfileStatus/ProfileStatus";
 
 const ProfileInfo = (props) => {
     
+    if(!props.profile) {
+        return <>Loading</>
+    }
+
+
     return(
         <div className={style.profileInfo}>
                 <div className={style.profileAvatar}>
@@ -14,8 +19,8 @@ const ProfileInfo = (props) => {
                 </div>
                 <div className={style.profileDesription}>
                     <h3>{props.profile.fullName}</h3>
-                    <p> {props.profile.aboutMe}</p>
-                    <ProfileStatus newStatusValue={props.newStatusValue} updateUserStatusActionCreator = {props.updateUserStatusActionCreator} updateUserStatusThunkCreator = {props.updateUserStatusThunkCreator} status={props.status}/>
+                   
+                    <ProfileStatus userId = {props.userId}/>
                     {/*<Contacts profile = {props.profile}/>*/}
                 </div>
             </div>

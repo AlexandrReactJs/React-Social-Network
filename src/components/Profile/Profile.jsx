@@ -10,8 +10,8 @@ const Profile = (props) => {
 
     return (
         <div className={style.profile}>
-            <ProfileInfo newStatusValue = {props.newStatusValue} updateUserStatusActionCreator = {props.updateUserStatusActionCreator} updateUserStatusThunkCreator = {props.updateUserStatusThunkCreator} profile = {props.profile} status={props.status}/>
-            <MyPostContainer />
+            <ProfileInfo  profile = {props.profile} userId = {props.profile.userId}/>
+            {/*<MyPostContainer /> */}
         </div>
     );
 }

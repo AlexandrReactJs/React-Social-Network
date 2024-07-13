@@ -8,21 +8,28 @@ import { fetchUserProfile } from "../../RTK/slices/profile-slice";
 const ProfileContainer = () => {
     const dispatch = useDispatch()
     
-    const {} = useSelector(state =>  state.profile)
-
+    const profile = useSelector(state =>  state.profile.profile)
+    console.log(profile)
 
     const { id } = useParams();
     
+    
     React.useEffect(() => {
+  
       dispatch(fetchUserProfile(id))
        
-    }, []);
+    }, [id]);
 
-    /* updateUserStatusActionCreator = {updateUserStatusActionCreator} updateUserStatusThunkCreator = {updateUserStatusThunkCreator} profile= {profile} status= {status} */
+
+    /* updateUserStatusActionCreator = {updateUserStatusActionCreator} updateUserStatusThunkCreator = {updateUserStatusThunkCreator}  status= {status} */
    
+    if(!profile) {
+      return <>Loading...</>
+    }
+    
     return (
          
-            <Profile  id= {id}/>
+            <Profile profile= {profile} id= {id}/>
         
     );
 }
